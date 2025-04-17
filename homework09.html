@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 用上面練習完成的 function 製作威力彩號碼產生器，將隨機出的數字用 document.write() 
+     顯示在網頁上，威力彩規則，A 區 1~38 取 6 個數字，B 區 1~8 取 1 個數字 -->
+    <script>
+      let A = [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+          38,
+        ],
+        B = [1, 2, 3, 4, 5, 6, 7, 8],
+        AnsA = [],
+        AnsB = [];
+      let temp1 = 0,
+        temp2 = 0,
+        del = 0;
+      const random1 = () => (num = Math.round(Math.random() * 37 + 1));
+      const random2 = () => (num = Math.floor(Math.random() * 8));
+
+      for (let i = 0; i < 6; i++) {
+        temp = random1();
+        temp1 = A.includes(temp);
+        temp2 = A.indexOf(temp);
+        // console.log(temp, temp1, temp2);
+        if (temp1) {
+          AnsA += A[temp2] + " ";
+          if (temp2 > 0) {
+            del = A.splice(temp2, 1, 0);
+          } else if (temp2 == -1) {
+            temp2 = A.indexOf(random1());
+          }
+        } else if (!temp1) {
+          i--;
+        }
+      }
+      AnsB += B[random2()];
+      // console.log(AnsA, AnsB);
+      document.write("A區:", AnsA, "<br>B區:", AnsB, "<br>");
+    </script>
+  </body>
+</html>
